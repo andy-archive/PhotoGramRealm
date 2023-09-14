@@ -69,6 +69,7 @@ final class RealmNewCollectionViewController: BaseViewController {
         })
     }
     
+    @available(iOS 14.0, *)
     static func setCollectionViewLayout() -> UICollectionViewLayout {
         let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)

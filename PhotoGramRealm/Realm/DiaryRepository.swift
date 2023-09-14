@@ -24,7 +24,7 @@ final class DiaryRepository: DiaryRepositoryType {
         
         do {
             let version = try schemaVersionAtURL(fileURL)
-            print("Schema Version: \(version)")
+//            print("Schema Version: \(version)")
         } catch {
             print(error)
         }

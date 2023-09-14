@@ -18,8 +18,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        let vc = RealmNewCollectionViewController()
+        let vc = HomeViewController()
         window?.rootViewController = UINavigationController(rootViewController: vc)
+        window?.makeKeyAndVisible()
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        
+        let firstNav = UINavigationController(rootViewController: HomeViewController())
+        let secondNav = UINavigationController(rootViewController: RealmNewCollectionViewController())
+        
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.setViewControllers([firstNav, secondNav], animated: true)
+        
+        if let items = tabBarController.tabBar.items {
+            items[0].image = UIImage(systemName: "house")
+            items[0].selectedImage = UIImage(systemName: "house.fill")
+            items[0].title = "Home"
+            
+            items[1].image = UIImage(systemName: "sparkle")
+            items[1].selectedImage = UIImage(systemName: "sparkles")
+            items[1].title = "NewCollection"
+        }
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
     }

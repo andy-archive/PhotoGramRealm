@@ -19,8 +19,8 @@ final class ToDoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let fileURL = realm.configuration.fileURL else { return }
-        print(fileURL)
+//        guard let fileURL = realm.configuration.fileURL else { return }
+//        print(fileURL)
         
 //        createDetail()
 //        createMemo()
@@ -86,7 +86,7 @@ final class ToDoViewController: BaseViewController {
     }
     
     private func createDetail() {
-        print(realm.objects(ToDoTable.self))
+//        print(realm.objects(ToDoTable.self))
         createTodo()
         
         //ToDoTable에서 title이 go shopping인 것

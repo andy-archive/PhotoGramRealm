@@ -71,7 +71,6 @@ final class AddViewController: BaseViewController {
     }
     
     @objc func saveButtonClicked() {
-        let realm = try! Realm() // Realm file에 접근하기 위해 위치를 찾는 코드
         
         let task = Diary(
             title: "TODAY I learned Realm \(Int.random(in: 1...9))",

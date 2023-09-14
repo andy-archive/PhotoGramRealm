@@ -30,10 +30,8 @@ final class HomeViewController: BaseViewController {
         
         repository.checkSchemaVersion()
         
-        print(tasks)
-        
-        guard let fileURL = realm.configuration.fileURL else { return }
-        print(fileURL)
+//        guard let fileURL = realm.configuration.fileURL else { return }
+//        print(fileURL)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,18 +89,35 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoListTableViewCell.reuseIdentifier) as? PhotoListTableViewCell else { return UITableViewCell() }
-        
+        let cell = UITableViewCell()
         let data = tasks[indexPath.row]
         
-        cell.titleLabel.text = data.title
-        cell.contentLabel.text = data.mainContents
-        cell.dateLabel.text = "\(data.date.formatted(date: .abbreviated, time: .shortened))"
+        //Cell Configuration
+        var configuration = cell.defaultContentConfiguration()
+        configuration.text = data.title
+        configuration.textProperties.color = .black
+        configuration.textToSecondaryTextVerticalPadding = 15
+        configuration.secondaryText = "\(data.date.formatted(date: .abbreviated, time: .shortened))"
+        configuration.secondaryTextProperties.color = .systemGray
+        configuration.image = loadImageFromDocument(fileName: "andy_\(data._id).jpg")
+        configuration.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+        cell.contentConfiguration = configuration
         
-        cell.diaryImageView.image = loadImageFromDocument(fileName: "andy_\(data._id).jpg")
+        var backgroundConfiguration = UIBackgroundConfiguration.listPlainCell()
+        backgroundConfiguration.backgroundColor = .systemGray6
+        backgroundConfiguration.cornerRadius = 15
+        backgroundConfiguration.strokeWidth = 2
+        backgroundConfiguration.strokeColor = .systemTeal
+        cell.backgroundConfiguration = backgroundConfiguration
         
-
+        //======================================================================================
+        //Traditional Cell
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: PhotoListTableViewCell.reuseIdentifier) as? PhotoListTableViewCell else { return UITableViewCell() }
+//        cell.titleLabel.text = data.title
+//        cell.contentLabel.text = data.mainContents
+//        cell.dateLabel.text = "\(data.date.formatted(date: .abbreviated, time: .shortened))"
+//        cell.diaryImageView.image = loadImageFromDocument(fileName: "andy_\(data._id).jpg")
+        //======================================================================================
         
         return cell
     }
